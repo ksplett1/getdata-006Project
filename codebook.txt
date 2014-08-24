@@ -1,0 +1,301 @@
+
+Code Book
+(reference - https://github.com/jtleek/datasharing)
+
+
+Coursera Course: Getting and Cleaning Data (class getdata-006)
+
+Project: Create a Tidy data set based on a wearable computing data set 
+         (original README.txt file included in github repository for more information)
+
+
+Program output design:
+
+Each measured variable is in one column
+	Each measurement column is the mean of either a mean or standard deviation original measure
+
+Each different observation of that variable should be in a different row
+	Each observation represents one activity for a subject ID
+	Each observation measurement is the mean of a original measurement variable per each activity for a subject ID
+
+There is one file created for each "kind" of variable
+	The output file includes the means of means and SD variables in the original data set
+
+A column is included that allows them to be linked
+	Subject ID and Activity columns are included to be able to link to other data sets.
+
+
+Program output file:
+
+The output file is a text file. Fields are separated by a space.
+
+There are 180 observations of 81 variables in the output file. The 180 observations represent 6 activities for each of the 30 subjects. The first variable is the subject ID. The second variable is the activity. The remaining 79 variables represent the mean of each mean and standard deviation measurement in the original data set.
+
+Here is an example of one data record in the output file:
+1 "LAYING" 0.22159824394 -0.0405139534294 -0.11320355358 -0.9280564692 -0.83682740562 -0.826061401628 -0.24888179828 0.70554977346 0.4458177198 -0.8968300184 -0.90772000676 -0.85236629022 0.0810865342 0.0038382040088 0.010834236361 -0.958482112 -0.9241492736 -0.9548551108 -0.016553093978 -0.064486124088 0.14868943626 -0.87354386782 -0.9510904402 -0.9082846626 -0.107270949192 -0.04151728689 -0.0740501211 -0.9186085208 -0.9679072436 -0.9577901596 -0.8419291525 -0.79514486386 -0.8419291525 -0.79514486386 -0.9543962646 -0.9282456284 -0.874759548 -0.81901016976 -0.96346103 -0.9358409828 -0.9390990524 -0.86706520518 -0.8826668762 -0.9244374346 -0.8336255561 -0.81289155944 -0.158792670508 0.097534841586 0.08943765522 -0.9570738838 -0.9224626098 -0.9480609042 -0.9641607086 -0.9322178704 -0.9605869872 0.132419092398 0.024513618956 0.02438794528 -0.850249174586 -0.9521914948 -0.909302721 -0.8822964508 -0.9512320494 -0.9165825082 -0.003546795856 -0.091529130882 0.01045812566 -0.8617676481 -0.7983009404 0.08640856294 -0.9333003608 -0.9218039756 0.26639115416 -0.8621901854 -0.82431943968 -0.1397750127 -0.9423669466 -0.9326606676 0.17648590708
+
+
+Variable Description:
+
+Each measurement variable is a numerical mean, represented by a real number between -1 and 1. 
+
+For example:  0.2215982 or -0.04051395
+
+The number at the beginning of each variable name corresponds to the number of the variable in the original data set. The number is included so that it is easy to relate the variable in the output with the original variable.
+
+XYZ at the end of the variable name is used to denote 3-axial signals in the X, Y and Z directions
+
+mean or std in the variable name indicates whether original measurement is a mean or standard deviation value
+
+The remaining parts of the name represent the type of measurement, as described in the feature_info.txt file (in the getdata-projectfiles-UCI HAR Dataset\UCI HAR Dataset directory):
+
+The features selected for this database come from the accelerometer and gyroscope 3-axial raw signals tAcc-XYZ and tGyro-XYZ. These time domain signals (prefix 't' to denote time) were captured at a constant rate of 50 Hz. Then they were filtered using a median filter and a 3rd order low pass Butterworth filter with a corner frequency of 20 Hz to remove noise. Similarly, the acceleration signal was then separated into body and gravity acceleration signals (tBodyAcc-XYZ and tGravityAcc-XYZ) using another low pass Butterworth filter with a corner frequency of 0.3 Hz. 
+
+Subsequently, the body linear acceleration and angular velocity were derived in time to obtain Jerk signals (tBodyAccJerk-XYZ and tBodyGyroJerk-XYZ). Also the magnitude of these three-dimensional signals were calculated using the Euclidean norm (tBodyAccMag, tGravityAccMag, tBodyAccJerkMag, tBodyGyroMag, tBodyGyroJerkMag). 
+
+Finally a Fast Fourier Transform (FFT) was applied to some of these signals producing fBodyAcc-XYZ, fBodyAccJerk-XYZ, fBodyGyro-XYZ, fBodyAccJerkMag, fBodyGyroMag, fBodyGyroJerkMag. (Note the 'f' to indicate frequency domain signals).
+
+
+List of variables in the output file:
+
+subjectid - integer representing the identity of the person's wearable device	
+activity - set of categorical (i.e., textual) values: "WALKING","WALKING_UPSTAIRS","WALKING_DOWNSTAIRS","SITTING","STANDING","LAYING"
+1_tBodyAcc_mean_X
+2_tBodyAcc_mean_Y
+3_tBodyAcc_mean_Z
+4_tBodyAcc_std_X
+5_tBodyAcc_std_Y
+6_tBodyAcc_std_Z
+41_tGravityAcc_mean_X
+42_tGravityAcc_mean_Y
+43_tGravityAcc_mean_Z
+44_tGravityAcc_std_X
+45_tGravityAcc_std_Y
+46_tGravityAcc_std_Z
+81_tBodyAccJerk_mean_X
+82_tBodyAccJerk_mean_Y
+83_tBodyAccJerk_mean_Z
+84_tBodyAccJerk_std_X
+85_tBodyAccJerk_std_Y
+86_tBodyAccJerk_std_Z
+121_tBodyGyro_mean_X
+122_tBodyGyro_mean_Y
+123_tBodyGyro_mean_Z
+124_tBodyGyro_std_X
+125_tBodyGyro_std_Y
+126_tBodyGyro_std_Z
+161_tBodyGyroJerk_mean_X
+162_tBodyGyroJerk_mean_Y
+163_tBodyGyroJerk_mean_Z
+164_tBodyGyroJerk_std_X
+165_tBodyGyroJerk_std_Y
+166_tBodyGyroJerk_std_Z
+201_tBodyAccMag_mean
+202_tBodyAccMag_std
+214_tGravityAccMag_mean
+215_tGravityAccMag_std
+227_tBodyAccJerkMag_mean
+228_tBodyAccJerkMag_std
+240_tBodyGyroMag_mean
+241_tBodyGyroMag_std
+253_tBodyGyroJerkMag_mean
+254_tBodyGyroJerkMag_std
+266_fBodyAcc_mean_X
+267_fBodyAcc_mean_Y
+268_fBodyAcc_mean_Z
+269_fBodyAcc_std_X
+270_fBodyAcc_std_Y
+271_fBodyAcc_std_Z
+294_fBodyAcc_meanFreq_X
+295_fBodyAcc_meanFreq_Y
+296_fBodyAcc_meanFreq_Z
+345_fBodyAccJerk_mean_X
+346_fBodyAccJerk_mean_Y
+347_fBodyAccJerk_mean_Z
+348_fBodyAccJerk_std_X
+349_fBodyAccJerk_std_Y
+350_fBodyAccJerk_std_Z
+373_fBodyAccJerk_meanFreq_X
+374_fBodyAccJerk_meanFreq_Y
+375_fBodyAccJerk_meanFreq_Z
+424_fBodyGyro_mean_X
+425_fBodyGyro_mean_Y
+426_fBodyGyro_mean_Z
+427_fBodyGyro_std_X
+428_fBodyGyro_std_Y
+429_fBodyGyro_std_Z
+452_fBodyGyro_meanFreq_X
+453_fBodyGyro_meanFreq_Y
+454_fBodyGyro_meanFreq_Z
+503_fBodyAccMag_mean
+504_fBodyAccMag_std
+513_fBodyAccMag_meanFreq
+516_fBodyBodyAccJerkMag_mean
+517_fBodyBodyAccJerkMag_std
+526_fBodyBodyAccJerkMag_meanFreq
+529_fBodyBodyGyroMag_mean
+530_fBodyBodyGyroMag_std
+539_fBodyBodyGyroMag_meanFreq
+542_fBodyBodyGyroJerkMag_mean
+543_fBodyBodyGyroJerkMag_std
+552_fBodyBodyGyroJerkMag_meanFreq
+
+
+Input Files:
+- 'features.txt': Original variable names
+- 'train/subject_train.txt': Training subject Ids.
+- 'train/X_train.txt': Training set.
+- 'train/y_train.txt': Training labels.
+- 'test/subject_test.txt': Test subject Ids.
+- 'test/X_test.txt': Test set.
+- 'test/y_test.txt': Test labels.
+
+Here are descriptions of the train data. Test and train data descriptions are equivalent. (info taken from the original README file):
+
+- 'train/subject_train.txt': Each row identifies the subject who performed the activity for each window sample. Its range is from 1 to 30. 
+
+- 'train/Inertial Signals/total_acc_x_train.txt': The acceleration signal from the smartphone accelerometer X axis in standard gravity units 'g'. Every row shows a 128 element vector. The same description applies for the 'total_acc_x_train.txt' and 'total_acc_z_train.txt' files for the Y and Z axis. 
+
+- 'train/Inertial Signals/body_acc_x_train.txt': The body acceleration signal obtained by subtracting the gravity from the total acceleration. 
+
+- 'train/Inertial Signals/body_gyro_x_train.txt': The angular velocity vector measured by the gyroscope for each window sample. The units are radians/second. 
+
+
+Output Files:
+- 'TidyDataset.txt'
+
+
+Program Design:
+Read test and training subject and activity label files as fixed column text files (read.fwf)
+Read test and training measurement files into R tables, which also conveniently converts the data to numbers (read.table)
+
+Add user-friendly names to the columns:
+Subject ID column is called "subjectid"
+Activity column is called "activity"
+Measurement column names are read from the features.txt file and cleaned up as follows:
+-     replace space or dash with underscore (colnumber_colname)
+-     remove parentheses
+-     replace individual "(" and ")" with "_"
+-     replace all: find "__" replace with "_"
+-     remove underscore at end
+
+cbind is used to combine subjectid, activity, and measurement data frames for the test and training sets, and then rbind is used to combine the resulting test and training data sets.
+
+After one complete data frame has been created with the test and train data sets, select only mean and std columns for analysis. Selection of the mean and std columns is done with grepl to look for patterns after converting all names to lower case:
+grepl("subjectid|activity|_mean|_std", tolower(names(completeset_df)))
+
+Activity numbers are replaced with the descriptive activity names in compute mean.
+
+Mean is computed with the mean function in the aggregate command.
+
+The mean values are written to the final output file is done using write.table to create a text file.
+
+
+Data Profile of input files:
+
+> nrow(testsubjects)
+[1] 2947
+> dim(testset)
+[1] 2947  561
+> unique(testsubjects)
+     V1
+1     2
+303   4
+620   9
+908  10
+1202 12
+1522 13
+1849 18
+2213 20
+2567 24
+> nrow(train_df)
+[1] 7352
+> dim(train_df)
+[1] 7352  563
+
+Data Profile of final data frame (written to output file):
+
+> str(mean_df)
+'data.frame':	180 obs. of  81 variables:
+ $ subjectid                        : int  1 2 3 4 5 6 7 8 9 10 ...
+ $ activity                         : chr  "LAYING" "LAYING" "LAYING" "LAYING" ...
+ $ 1_tBodyAcc_mean_X                : num  0.222 0.281 0.276 0.264 0.278 ...
+ $ 2_tBodyAcc_mean_Y                : num  -0.0405 -0.0182 -0.019 -0.015 -0.0183 ...
+ $ 3_tBodyAcc_mean_Z                : num  -0.113 -0.107 -0.101 -0.111 -0.108 ...
+ $ 4_tBodyAcc_std_X                 : num  -0.928 -0.974 -0.983 -0.954 -0.966 ...
+ $ 5_tBodyAcc_std_Y                 : num  -0.837 -0.98 -0.962 -0.942 -0.969 ...
+ $ 6_tBodyAcc_std_Z                 : num  -0.826 -0.984 -0.964 -0.963 -0.969 ...
+ $ 41_tGravityAcc_mean_X            : num  -0.249 -0.51 -0.242 -0.421 -0.483 ...
+ $ 42_tGravityAcc_mean_Y            : num  0.706 0.753 0.837 0.915 0.955 ...
+ $ 43_tGravityAcc_mean_Z            : num  0.446 0.647 0.489 0.342 0.264 ...
+ $ 44_tGravityAcc_std_X             : num  -0.897 -0.959 -0.983 -0.921 -0.946 ...
+ $ 45_tGravityAcc_std_Y             : num  -0.908 -0.988 -0.981 -0.97 -0.986 ...
+ $ 46_tGravityAcc_std_Z             : num  -0.852 -0.984 -0.965 -0.976 -0.977 ...
+ $ 81_tBodyAccJerk_mean_X           : num  0.0811 0.0826 0.077 0.0934 0.0848 ...
+ $ 82_tBodyAccJerk_mean_Y           : num  0.00384 0.01225 0.0138 0.00693 0.00747 ...
+ $ 83_tBodyAccJerk_mean_Z           : num  0.01083 -0.0018 -0.00436 -0.00641 -0.00304 ...
+ $ 84_tBodyAccJerk_std_X            : num  -0.958 -0.986 -0.981 -0.978 -0.983 ...
+ $ 85_tBodyAccJerk_std_Y            : num  -0.924 -0.983 -0.969 -0.942 -0.965 ...
+ $ 86_tBodyAccJerk_std_Z            : num  -0.955 -0.988 -0.982 -0.979 -0.985 ...
+ $ 121_tBodyGyro_mean_X             : num  -0.01655 -0.01848 -0.02082 -0.00923 -0.02189 ...
+ $ 122_tBodyGyro_mean_Y             : num  -0.0645 -0.1118 -0.0719 -0.093 -0.0799 ...
+ $ 123_tBodyGyro_mean_Z             : num  0.149 0.145 0.138 0.17 0.16 ...
+ $ 124_tBodyGyro_std_X              : num  -0.874 -0.988 -0.975 -0.973 -0.979 ...
+ $ 125_tBodyGyro_std_Y              : num  -0.951 -0.982 -0.977 -0.961 -0.977 ...
+ $ 126_tBodyGyro_std_Z              : num  -0.908 -0.96 -0.964 -0.962 -0.961 ...
+ $ 161_tBodyGyroJerk_mean_X         : num  -0.107 -0.102 -0.1 -0.105 -0.102 ...
+ $ 162_tBodyGyroJerk_mean_Y         : num  -0.0415 -0.0359 -0.039 -0.0381 -0.0404 ...
+ $ 163_tBodyGyroJerk_mean_Z         : num  -0.0741 -0.0702 -0.0687 -0.0712 -0.0708 ...
+ $ 164_tBodyGyroJerk_std_X          : num  -0.919 -0.993 -0.98 -0.975 -0.983 ...
+ $ 165_tBodyGyroJerk_std_Y          : num  -0.968 -0.99 -0.987 -0.987 -0.984 ...
+ $ 166_tBodyGyroJerk_std_Z          : num  -0.958 -0.988 -0.983 -0.984 -0.99 ...
+ $ 201_tBodyAccMag_mean             : num  -0.842 -0.977 -0.973 -0.955 -0.967 ...
+ $ 202_tBodyAccMag_std              : num  -0.795 -0.973 -0.964 -0.931 -0.959 ...
+ $ 214_tGravityAccMag_mean          : num  -0.842 -0.977 -0.973 -0.955 -0.967 ...
+ $ 215_tGravityAccMag_std           : num  -0.795 -0.973 -0.964 -0.931 -0.959 ...
+ $ 227_tBodyAccJerkMag_mean         : num  -0.954 -0.988 -0.979 -0.97 -0.98 ...
+ $ 228_tBodyAccJerkMag_std          : num  -0.928 -0.986 -0.976 -0.961 -0.977 ...
+ $ 240_tBodyGyroMag_mean            : num  -0.875 -0.95 -0.952 -0.93 -0.947 ...
+ $ 241_tBodyGyroMag_std             : num  -0.819 -0.961 -0.954 -0.947 -0.958 ...
+ $ 253_tBodyGyroJerkMag_mean        : num  -0.963 -0.992 -0.987 -0.985 -0.986 ...
+ $ 254_tBodyGyroJerkMag_std         : num  -0.936 -0.99 -0.983 -0.983 -0.984 ...
+ $ 266_fBodyAcc_mean_X              : num  -0.939 -0.977 -0.981 -0.959 -0.969 ...
+ $ 267_fBodyAcc_mean_Y              : num  -0.867 -0.98 -0.961 -0.939 -0.965 ...
+ $ 268_fBodyAcc_mean_Z              : num  -0.883 -0.984 -0.968 -0.968 -0.977 ...
+ $ 269_fBodyAcc_std_X               : num  -0.924 -0.973 -0.984 -0.952 -0.965 ...
+ $ 270_fBodyAcc_std_Y               : num  -0.834 -0.981 -0.964 -0.946 -0.973 ...
+ $ 271_fBodyAcc_std_Z               : num  -0.813 -0.985 -0.963 -0.962 -0.966 ...
+ $ 294_fBodyAcc_meanFreq_X          : num  -0.159 -0.146 -0.074 -0.274 -0.136 ...
+ $ 295_fBodyAcc_meanFreq_Y          : num  0.0975 0.2573 0.2385 0.3662 0.4665 ...
+ $ 296_fBodyAcc_meanFreq_Z          : num  0.0894 0.4025 0.217 0.2013 0.1323 ...
+ $ 345_fBodyAccJerk_mean_X          : num  -0.957 -0.986 -0.981 -0.979 -0.983 ...
+ $ 346_fBodyAccJerk_mean_Y          : num  -0.922 -0.983 -0.969 -0.944 -0.965 ...
+ $ 347_fBodyAccJerk_mean_Z          : num  -0.948 -0.986 -0.979 -0.975 -0.983 ...
+ $ 348_fBodyAccJerk_std_X           : num  -0.964 -0.987 -0.983 -0.98 -0.986 ...
+ $ 349_fBodyAccJerk_std_Y           : num  -0.932 -0.985 -0.971 -0.944 -0.966 ...
+ $ 350_fBodyAccJerk_std_Z           : num  -0.961 -0.989 -0.984 -0.98 -0.986 ...
+ $ 373_fBodyAccJerk_meanFreq_X      : num  0.132 0.16 0.176 0.182 0.24 ...
+ $ 374_fBodyAccJerk_meanFreq_Y      : num  0.0245 0.1212 -0.0132 0.0987 0.1957 ...
+ $ 375_fBodyAccJerk_meanFreq_Z      : num  0.0244 0.1906 0.0448 0.077 0.0917 ...
+ $ 424_fBodyGyro_mean_X             : num  -0.85 -0.986 -0.97 -0.967 -0.976 ...
+ $ 425_fBodyGyro_mean_Y             : num  -0.952 -0.983 -0.978 -0.972 -0.978 ...
+ $ 426_fBodyGyro_mean_Z             : num  -0.909 -0.963 -0.962 -0.961 -0.963 ...
+ $ 427_fBodyGyro_std_X              : num  -0.882 -0.989 -0.976 -0.975 -0.981 ...
+ $ 428_fBodyGyro_std_Y              : num  -0.951 -0.982 -0.977 -0.956 -0.977 ...
+ $ 429_fBodyGyro_std_Z              : num  -0.917 -0.963 -0.967 -0.966 -0.963 ...
+ $ 452_fBodyGyro_meanFreq_X         : num  -0.00355 0.10261 -0.08222 -0.06609 -0.02272 ...
+ $ 453_fBodyGyro_meanFreq_Y         : num  -0.0915 0.0423 -0.0267 -0.5269 0.0681 ...
+ $ 454_fBodyGyro_meanFreq_Z         : num  0.0105 0.0553 0.1477 0.1529 0.0414 ...
+ $ 503_fBodyAccMag_mean             : num  -0.862 -0.975 -0.966 -0.939 -0.962 ...
+ $ 504_fBodyAccMag_std              : num  -0.798 -0.975 -0.968 -0.937 -0.963 ...
+ $ 513_fBodyAccMag_meanFreq         : num  0.0864 0.2663 0.237 0.2417 0.292 ...
+ $ 516_fBodyBodyAccJerkMag_mean     : num  -0.933 -0.985 -0.976 -0.962 -0.977 ...
+ $ 517_fBodyBodyAccJerkMag_std      : num  -0.922 -0.985 -0.975 -0.958 -0.976 ...
+ $ 526_fBodyBodyAccJerkMag_meanFreq : num  0.266 0.342 0.239 0.274 0.197 ...
+ $ 529_fBodyBodyGyroMag_mean        : num  -0.862 -0.972 -0.965 -0.962 -0.968 ...
+ $ 530_fBodyBodyGyroMag_std         : num  -0.824 -0.961 -0.955 -0.947 -0.959 ...
+ $ 539_fBodyBodyGyroMag_meanFreq    : num  -0.1398 0.0186 -0.0229 -0.2599 0.1024 ...
+ $ 542_fBodyBodyGyroJerkMag_mean    : num  -0.942 -0.99 -0.984 -0.984 -0.985 ...
+ $ 543_fBodyBodyGyroJerkMag_std     : num  -0.933 -0.989 -0.983 -0.983 -0.983 ...
+ $ 552_fBodyBodyGyroJerkMag_meanFreq: num  0.1765 0.2648 0.1107 0.2029 0.0247 ...
+> 
