@@ -1,4 +1,4 @@
-
+ 
     ## ##################################################################
 
     ## Description:
@@ -55,14 +55,14 @@
 
     ## ##################################################################
 
-# note: assume setwd is done before sourcing this R program
-# setwd("C:/myClasses/cloudera/GettingAndCleaningData/Project")
+# note: assume setwd is done before sourcing this R program. For example:
+# setwd("C:/myClasses/cloudera/GettingAndCleaningData/Project/data/getdata-projectfiles-UCI HAR Dataset/UCI HAR Dataset")
 
 # read test files
 
-testsubjects <- read.fwf("./data/getdata-projectfiles-UCI HAR Dataset/UCI HAR Dataset/test/subject_test.txt", widths=c(2))
-testlabels  <- read.fwf("./data/getdata-projectfiles-UCI HAR Dataset/UCI HAR Dataset/test/y_test.txt", widths=c(1))
-testset <- read.table("./data/getdata-projectfiles-UCI HAR Dataset/UCI HAR Dataset/test/X_test.txt", header = FALSE)
+testsubjects <- read.fwf("./test/subject_test.txt", widths=c(2))
+testlabels  <- read.fwf("./test/y_test.txt", widths=c(1))
+testset <- read.table("./test/X_test.txt", header = FALSE)
 
 # read column names and modify to more user-friendly names
 #     replace space or dash with underscore (colnumber_colname)
@@ -71,7 +71,7 @@ testset <- read.table("./data/getdata-projectfiles-UCI HAR Dataset/UCI HAR Datas
 #     replace all: find "__" replace with "_"
 #     remove underscore at end
 
-colnames <- readLines("./data/getdata-projectfiles-UCI HAR Dataset/UCI HAR Dataset/features.txt")
+colnames <- readLines("./features.txt")
 colheaders = sapply(colnames,  function(x){ gsub(" |-|,","_", x) })
 colheaders <- gsub("\\(\\)","", colheaders )
 colheaders <- gsub("\\(|\\)","_", colheaders )
@@ -90,9 +90,9 @@ test_df <- cbind(test_df, testset)
 
 # read training files
 # note: read.table automatically converts the data to numbers
-trainsubjects <- read.fwf("./data/getdata-projectfiles-UCI HAR Dataset/UCI HAR Dataset/train/subject_train.txt", widths=c(2))
-trainlabels  <- read.fwf("./data/getdata-projectfiles-UCI HAR Dataset/UCI HAR Dataset/train/y_train.txt", widths=c(1))
-trainset <- read.table("./data/getdata-projectfiles-UCI HAR Dataset/UCI HAR Dataset/train/X_train.txt", header = FALSE)
+trainsubjects <- read.fwf("./train/subject_train.txt", widths=c(2))
+trainlabels  <- read.fwf("./train/y_train.txt", widths=c(1))
+trainset <- read.table("./train/X_train.txt", header = FALSE)
 
 # rename columns in each training df
 colnames(trainsubjects)[1] <- "subjectid"
